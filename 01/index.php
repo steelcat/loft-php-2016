@@ -2,7 +2,7 @@
 
 // #1
 $name = 'Виталий';
-$age = 41;
+$age = 43;
 $age_second_digit = $age % 10;
 switch ($age_second_digit) {
     case 1: {
