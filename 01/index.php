@@ -1,5 +1,7 @@
 <?php
 
+// Задание 1
+
 // #1
 $name = 'Виталий';
 $age = 43;
@@ -19,3 +21,15 @@ switch ($age_second_digit) {
 echo "Меня зовут: $name <br>";
 echo "Мне " . $age . " $age_title <br>";
 echo '“!|\\/’”\\<br>';
+
+echo '<br>';
+
+// #2
+$pictures = 80;
+$pictures_flomaster = 23;
+$pictures_pencil = 40;
+
+$pictures_painting = $pictures - ($pictures_flomaster + $pictures_pencil);
+echo "Красками написано: $pictures_painting картин<br>";
+
+echo '<br>';
