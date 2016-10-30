@@ -40,3 +40,23 @@ echo (defined('CONSTANT') ? "Константа определена и равн
 define('CONSTANT', 'new constant');
 echo ((CONSTANT == 'new constant') ? "Константа переопределена и равна: "
     . CONSTANT : "Константа не переопределена.") . "<br>";
+
+echo '<br>';
+
+// #4
+$age = 25;
+if (($age>=18)&($age<=65)) {
+    echo "Вам еще работать и работать";
+}
+elseif ($age>65) {
+    echo "Вам пора на пенсию";
+}
+elseif (($age>=1)&($age<=17)) {
+    echo "Вам ещё рано работать";
+}
+else {
+    echo "Неизвестный возраст";
+}
+echo "<br>";
+
+echo "<br>";
