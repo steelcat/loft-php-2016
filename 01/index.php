@@ -60,3 +60,33 @@ else {
 echo "<br>";
 
 echo "<br>";
+
+// #5
+
+/**
+ * BMW
+ */
+$bmw['model'] = "X5";
+$bmw['speed'] = 120;
+$bmw['doors'] = 5;
+$bmw['year'] = 2015;
+
+/**
+ * Toyota
+ */
+$toyota['model'] = "RAV 4";
+$toyota['speed'] = 130;
+$toyota['doors'] = 3;
+$toyota['year'] = 2014;
+
+/**
+ * Opel
+ */
+$opel['model'] = "Astra";
+$opel['speed'] = 110;
+$opel['doors'] = 4;
+$opel['year'] = 2010;
+
+$cars = ['bmw' => $bmw, 'toyota' => $toyota, 'opel' => $opel];
+
+var_dump($cars);
