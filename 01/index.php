@@ -87,6 +87,18 @@ $opel['speed'] = 110;
 $opel['doors'] = 4;
 $opel['year'] = 2010;
 
-$cars = ['bmw' => $bmw, 'toyota' => $toyota, 'opel' => $opel];
+$cars = [
+    ['car_name' => 'bmw', 'params' => $bmw],
+    ['car_name' => 'toyota', 'params' => $toyota],
+    ['car_name' => 'opel', 'params' => $opel]
+];
 
-var_dump($cars);
+foreach ($cars as $car) {
+    echo "CAR " . $car['car_name'] . "<br>";
+    foreach ($car['params'] as $param) {
+        echo $param . ' ';
+    }
+    echo "<br>";
+}
+
+echo "<br>";
