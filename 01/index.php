@@ -33,3 +33,12 @@ $pictures_painting = $pictures - ($pictures_flomaster + $pictures_pencil);
 echo "Красками написано: $pictures_painting картин<br>";
 
 echo '<br>';
+
+// #3
+define('CONSTANT', 'constant');
+echo (defined('CONSTANT') ? "Константа определена и равна: " . CONSTANT : "Константа не определена.") . "<br>";
+define('CONSTANT', 'new constant');
+echo ((CONSTANT == 'new constant') ? "Константа переопределена и равна: "
+    . CONSTANT : "Переопределить константу не удалось.") . "<br>";
+
+echo '<br>';
