@@ -39,7 +39,7 @@ define('CONSTANT', 'constant');
 echo (defined('CONSTANT') ? "Константа определена и равна: " . CONSTANT : "Константа не определена.") . "<br>";
 define('CONSTANT', 'new constant');
 echo ((CONSTANT == 'new constant') ? "Константа переопределена и равна: "
-    . CONSTANT : "Константа не переопределена.") . "<br>";
+        . CONSTANT : "Константа не переопределена.") . "<br>";
 
 echo '<br>';
 
@@ -47,14 +47,11 @@ echo '<br>';
 $age = 25;
 if (($age>=18)&($age<=65)) {
     echo "Вам еще работать и работать";
-}
-elseif ($age>65) {
+} elseif ($age>65) {
     echo "Вам пора на пенсию";
-}
-elseif (($age>=1)&($age<=17)) {
+} elseif (($age>=1)&($age<=17)) {
     echo "Вам ещё рано работать";
-}
-else {
+} else {
     echo "Неизвестный возраст";
 }
 echo "<br>";
@@ -118,6 +115,24 @@ foreach ($cars as $car) {
     echo "CAR " . $car['car_name'] . "<br>";
     foreach ($car['params'] as $param) {
         echo $param . ' ';
+    }
+    echo "<br>";
+}
+
+echo "<br>";
+
+// #7
+for ($x=1; $x<=10; $x++) {
+    for ($y=1; $y<=10; $y++) {
+        $result = $x * $y;
+        if ((($x % 2) == 0) & ((($y % 2) == 0))) {
+            $bracket = ['(', ')'];
+        } elseif ((($x % 2) != 0) & ((($y % 2) != 0))) {
+            $bracket = ['[', ']'];
+        } else {
+            $bracket = ['', ''];
+        }
+        echo " " . $bracket[0] . $result . $bracket[1] . " ";
     }
     echo "<br>";
 }
