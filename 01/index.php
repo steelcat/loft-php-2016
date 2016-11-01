@@ -138,3 +138,23 @@ for ($x=1; $x<=10; $x++) {
 }
 
 echo "<br>";
+
+// #8
+$str = "На улице хорошая погода";
+echo $str;
+echo '<br>';
+$str_array = explode(' ', $str);
+print_r($str_array);
+echo "<br>";
+$elements = count($str_array);
+$index = 0;
+$result = "";
+while ($index < $elements) :
+    $result = $result . $str_array[$index] . '_';
+    $index++;
+endwhile;
+echo $result;
+
+echo "<br><img src='http://spiderdiaries.richmond.edu/_common_KP3/images/spiderdiaries/blogs/danny17/Sophomroe%20Year%20Assets/Pig%20Roast/thats-all-folks-porky-pig.jpg'>";
+
+
