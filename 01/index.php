@@ -155,6 +155,5 @@ while ($index < $elements) :
 endwhile;
 echo $result;
 
-echo "<br><img src='http://spiderdiaries.richmond.edu/_common_KP3/images/spiderdiaries/blogs/danny17/Sophomroe%20Year%20Assets/Pig%20Roast/thats-all-folks-porky-pig.jpg'>";
-
-
+echo "<br><img src='http://spiderdiaries.richmond.edu/_common_KP3/images/spiderdiaries/"
+    . "blogs/danny17/Sophomroe%20Year%20Assets/Pig%20Roast/thats-all-folks-porky-pig.jpg'>";
