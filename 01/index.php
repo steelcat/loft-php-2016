@@ -153,7 +153,7 @@ while ($index < $elements) :
     $reverse_array[] = $str_array[$elements - $index - 1];
     $index++;
 endwhile;
-$result = implode ('_', $reverse_array);
+$result = implode('_', $reverse_array);
 echo $result;
 
 echo "<br><img src='http://spiderdiaries.richmond.edu/_common_KP3/images/spiderdiaries/"
