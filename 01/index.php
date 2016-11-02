@@ -148,11 +148,12 @@ print_r($str_array);
 echo "<br>";
 $elements = count($str_array);
 $index = 0;
-$result = "";
+$reverse_array = [];
 while ($index < $elements) :
-    $result = $result . $str_array[$index] . '_';
+    $reverse_array[] = $str_array[$elements - $index - 1];
     $index++;
 endwhile;
+$result = implode ('_', $reverse_array);
 echo $result;
 
 echo "<br><img src='http://spiderdiaries.richmond.edu/_common_KP3/images/spiderdiaries/"
