@@ -28,6 +28,10 @@ function string_to_paragraph(array $arr, $cond = false)
  */
 string_to_paragraph($arr, false);
 echo '<br>';
+echo string_to_paragraph($arr, false);
+echo '<br>';
+var_dump(string_to_paragraph($arr, true));
+echo '<br>';
 echo string_to_paragraph($arr, true);
 
 echo '<br>';
