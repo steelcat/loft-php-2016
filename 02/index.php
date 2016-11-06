@@ -105,3 +105,33 @@ echo '<br>';
 arr_to_arithmetic_extend('+', 1, 2, '%%%%');
 
 echo '<br><br>';
+
+// #4
+/**
+ * @param $first_digit
+ * @param $second_digit
+ */
+function multi_table($first_digit, $second_digit)
+{
+    if (is_int($first_digit) && is_int($second_digit)) {
+        for ($x=1; $x<=$first_digit; $x++) {
+            for ($y=1; $y<=$second_digit; $y++) {
+                $result = $x * $y;
+                echo "$result ";
+            }
+            echo '<br>';
+        }
+    } else {
+        echo "Одно из заданных значений не целое число";
+    }
+}
+
+/**
+ * Test of multi_table function
+ */
+multi_table(3, 4); // correct
+echo '<br>';
+multi_table(3, 4.5); // not correct
+echo '<br>';
+
+echo '<br><br>';
