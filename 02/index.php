@@ -88,3 +88,20 @@ arr_to_arithmetic([1, 2, 3, 4, 5], '='); // not correct, not correct operator
 echo '<br><br>';
 
 // #3
+/**
+ * @param $arithmetic
+ * @param array ...$digits_arr
+ */
+function arr_to_arithmetic_extend($arithmetic, ...$digits_arr)
+{
+    arr_to_arithmetic($digits_arr, $arithmetic);
+}
+
+/**
+ * Test of arr_to_arithmetic_extend function
+ */
+arr_to_arithmetic_extend('+', 1, 2, 3);
+echo '<br>';
+arr_to_arithmetic_extend('+', 1, 2, '%%%%');
+
+echo '<br><br>';
