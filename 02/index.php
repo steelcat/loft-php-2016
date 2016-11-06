@@ -86,7 +86,7 @@ echo '<br>';
 arr_to_arithmetic([1, 2, 3, 4, 5], '='); // not correct, not correct operator
 
 echo '<br><br>';
-
+//arr_to_arithmetic([1, 2, 3, 4, 5], true); так работает
 // #3
 /**
  * @param $arithmetic
@@ -122,7 +122,7 @@ function multi_table($first_digit, $second_digit)
             echo '<br>';
         }
     } else {
-        echo "Одно из заданных значений не целое число";
+        echo "Одно из заданных значений не целое число";//Двойные кавычки
     }
 }
 
@@ -165,15 +165,17 @@ function palindrom_echo($str)
 /**
  * Test
  */
-palindrom_echo('шабаш'); // true
+//palindrom_echo('шабаш'); // true
+//echo '<br>';
+//palindrom_echo('шабашка'); // false
 echo '<br>';
-palindrom_echo('шабашка'); // false
-echo '<br>';
+//palindrom_echo('Коту скоро сорок суток'); // не работает ((
+//palindrom_echo('А вот и харя рахитова'); // не работает ((
 
 echo '<br><br>';
 
 // #6
-echo date("d.m.Y H:i");
+echo date("d.m.Y H:i");//Двойные кавычки(
 echo '<br>';
 echo strtotime("24.02.2016 00:00:00");
 echo '<br>';

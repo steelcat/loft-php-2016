@@ -45,11 +45,11 @@ echo '<br>';
 
 // #4
 $age = 25;
-if ($age>=18 && $age<=65) {
-    echo "Вам еще работать и работать";
-} elseif ($age>65) {
+if ($age >= 18 && $age <= 65) {
+    echo "Вам еще работать и работать";// Двойные кавычки избыточны
+} elseif ($age > 65) { // так не читабельно надо разделять пробелами
     echo "Вам пора на пенсию";
-} elseif ($age>=1 && $age<=17) {
+} elseif ($age >= 1 && $age<=17) {
     echo "Вам ещё рано работать";
 } else {
     echo "Неизвестный возраст";
@@ -60,6 +60,7 @@ echo "<br>";
 
 // #5
 $day = 6;
+// если будет  true отработает
 switch ($day) {
     case 1:
     case 2:
@@ -84,10 +85,10 @@ echo "<br>";
 /**
  * BMW
  */
-$bmw['model'] = "X5";
+$bmw['model'] = 'X5';
 $bmw['speed'] = 120;
 $bmw['doors'] = 5;
-$bmw['year'] = 2015;
+$bmw['year']  = 2015;
 
 /**
  * Toyota
@@ -106,9 +107,9 @@ $opel['doors'] = 4;
 $opel['year'] = 2010;
 
 $cars = [
-    ['car_name' => 'bmw', 'params' => $bmw],
+    ['car_name' => 'bmw', 'params'    => $bmw],
     ['car_name' => 'toyota', 'params' => $toyota],
-    ['car_name' => 'opel', 'params' => $opel]
+    ['car_name' => 'opel', 'params'   => $opel]
 ];
 
 foreach ($cars as $car) {
@@ -136,7 +137,7 @@ for ($x=1; $x<=10; $x++) {
     }
     echo "<br>";
 }
-
+//в скобки надо заключить только результат,у тебя числа которые переумножаются тоже в скобках
 echo "<br>";
 
 // #8
@@ -147,12 +148,14 @@ $str_array = explode(' ', $str);
 print_r($str_array);
 echo "<br>";
 $elements = count($str_array);
-$index = 0;
+$index    = 0;
 $reverse_array = [];
+
 while ($index < $elements) :
     $reverse_array[] = $str_array[$elements - $index - 1];
     $index++;
 endwhile;
+
 $result = implode('_', $reverse_array);
 echo $result;
 
