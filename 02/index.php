@@ -216,5 +216,11 @@ function smile()
 /**
  * Test
  */
-$str = ":)RX packets:950381 errors:0 dropped:0 overruns:0 frame:0. ";
+$str = "RX packets:950381 errors:0 dropped:0 overruns:0 frame:0. ";
 packets($str);
+echo '<br>';
+$str = "RX packets:950381 errors:0 dropped:0 overruns:0 frame:0. :)";
+packets($str);
+echo '<br>';
+
+echo '<br><br>';
