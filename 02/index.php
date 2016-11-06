@@ -47,7 +47,7 @@ function arr_to_arithmetic($digits_arr, $arithmetic)
     try {
         foreach ($digits_arr as $digit) {
             if (is_numeric($digit) && !is_string($digit)) {
-                switch ($arithmetic) {
+                switch ((string) $arithmetic) { // решил приведением к строковому типу
                     case '+':
                         $result = $result + $digit;
                         break;
@@ -61,15 +61,15 @@ function arr_to_arithmetic($digits_arr, $arithmetic)
                         $result = $result / $digit;
                         break;
                     default:
-                        $result = "Задана некорректная арифметическая операция";
+                        $result = 'Задана некорректная арифметическая операция';
                 }
             } else {
-                $result = "Задано не числовое значение";
+                $result = 'Задано не числовое значение';
                 break;
             }
         }
     } catch (Exception $e) {
-        $result = "Произошла неизвестная ошибка";
+        $result = 'Произошла неизвестная ошибка';
     }
     echo $result;
 }
@@ -84,9 +84,11 @@ echo '<br>';
 arr_to_arithmetic([1, 2, false, 4, 5], '+'); // not correct, not correct digit
 echo '<br>';
 arr_to_arithmetic([1, 2, 3, 4, 5], '='); // not correct, not correct operator
+echo '<br>';
+arr_to_arithmetic([1, 2, 3, 4, 5], true); //так работает - ПОФИКСИЛ
 
 echo '<br><br>';
-//arr_to_arithmetic([1, 2, 3, 4, 5], true); так работает
+
 // #3
 /**
  * @param $arithmetic
@@ -122,7 +124,7 @@ function multi_table($first_digit, $second_digit)
             echo '<br>';
         }
     } else {
-        echo "Одно из заданных значений не целое число";//Двойные кавычки
+        echo 'Одно из заданных значений не целое число';//Двойные кавычки - ПОФИКСИЛ
     }
 }
 
@@ -147,7 +149,7 @@ function palindrom($str)
     for ($i = mb_strlen($str, "UTF-8"); $i >= 0; $i--) {
         $str_rev = $str_rev . mb_substr($str, $i, 1, "UTF-8");
     }
-    return ($str === $str_rev);
+    return str_replace(' ', '', mb_strtolower($str)) === str_replace(' ', '', mb_strtolower($str_rev)); // ФИКС
 }
 
 /**
@@ -156,9 +158,9 @@ function palindrom($str)
 function palindrom_echo($str)
 {
     if (palindrom($str)) {
-        echo "Строка является палиндромом";
+        echo 'Строка является палиндромом';
     } else {
-        echo "Строка не является палиндромом";
+        echo 'Строка не является палиндромом';
     }
 }
 
@@ -169,23 +171,24 @@ function palindrom_echo($str)
 //echo '<br>';
 //palindrom_echo('шабашка'); // false
 echo '<br>';
-//palindrom_echo('Коту скоро сорок суток'); // не работает ((
-//palindrom_echo('А вот и харя рахитова'); // не работает ((
+palindrom_echo('Коту скоро сорок суток'); // не работает (( - ПОФИКСИЛ, приведя в нижний регистр и удалив пробелы
+echo '<br>';
+palindrom_echo('А вот и харя рахитова'); // не работает ((
 
 echo '<br><br>';
 
 // #6
-echo date("d.m.Y H:i");//Двойные кавычки(
+echo date('d.m.Y H:i');//Двойные кавычки( - ФИКС
 echo '<br>';
-echo strtotime("24.02.2016 00:00:00");
+echo strtotime('24.02.2016 00:00:00');
 echo '<br>';
 
 echo '<br><br>';
 
 // #7
-echo str_replace("К", "", "Карл у Клары украл Кораллы");
+echo str_replace('К', '', 'Карл у Клары украл Кораллы');
 echo '<br>';
-echo str_replace("Две", "Три", "Две бутылки лимонада");
+echo str_replace('Две', 'Три', 'Две бутылки лимонада');
 echo '<br>';
 
 echo '<br><br>';
@@ -202,7 +205,7 @@ function packets($str)
     if (preg_match("/\:\)/", $str, $packets)) {
         $result =  smile();
     } elseif ($packets > 1000) {
-        $result = "Сеть есть";
+        $result = 'Сеть есть';
     }
     echo $result;
 }
@@ -218,10 +221,10 @@ function smile()
 /**
  * Test
  */
-$str = "RX packets:950381 errors:0 dropped:0 overruns:0 frame:0. ";
+$str = 'RX packets:950381 errors:0 dropped:0 overruns:0 frame:0. ';
 packets($str);
 echo '<br>';
-$str = "RX packets:950381 errors:0 dropped:0 overruns:0 frame:0. :)";
+$str = 'RX packets:950381 errors:0 dropped:0 overruns:0 frame:0. :)';
 packets($str);
 echo '<br>';
 
@@ -233,7 +236,7 @@ function get_content_of_file($file_name)
     if (file_exists($file_name) && is_file($file_name)) {
         $result = file_get_contents($file_name);
     } else {
-        $result = "Файл не существует";
+        $result = 'Файл не существует';
     }
     echo $result;
 }
@@ -246,6 +249,6 @@ get_content_of_file('test.txt');
 echo '<br><br>';
 
 // #10
-$file = fopen("anothertest.txt", "w");
-fwrite($file, "Hello again!");
+$file = fopen('anothertest.txt', 'w');
+fwrite($file, 'Hello again!');
 fclose($file);
