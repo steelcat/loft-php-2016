@@ -242,3 +242,8 @@ function get_content_of_file($file_name)
 get_content_of_file('test.txt');
 
 echo '<br><br>';
+
+// #10
+$file = fopen("anothertest.txt", "w");
+fwrite($file, "Hello again!");
+fclose($file);
