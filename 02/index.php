@@ -187,3 +187,34 @@ echo str_replace("Две", "Три", "Две бутылки лимонада");
 echo '<br>';
 
 echo '<br><br>';
+
+// #8
+/**
+ * @param $str
+ */
+function packets($str)
+{
+    $result = "";
+    preg_match("/packets:\d+/", $str, $packets);
+    $packets = (int)str_replace("packets:", "", $packets)[0];
+    if (preg_match("/\:\)/", $str, $packets)) {
+        $result =  smile();
+    } elseif ($packets > 1000) {
+        $result = "Сеть есть";
+    }
+    echo $result;
+}
+
+/**
+ * @return string
+ */
+function smile()
+{
+    return '(∪ ◡ ∪)';
+}
+
+/**
+ * Test
+ */
+$str = ":)RX packets:950381 errors:0 dropped:0 overruns:0 frame:0. ";
+packets($str);
