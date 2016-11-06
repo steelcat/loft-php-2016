@@ -36,27 +36,27 @@ echo '<br>';
 
 // #3
 define('CONSTANT', 'constant');
-echo (defined('CONSTANT') ? "Константа определена и равна: " . CONSTANT : "Константа не определена.") . "<br>";
+echo (defined('CONSTANT') ? 'Константа определена и равна: ' . CONSTANT : 'Константа не определена.') . '<br>';
 define('CONSTANT', 'new constant');
-echo ((CONSTANT == 'new constant') ? "Константа переопределена и равна: "
-        . CONSTANT : "Константа не переопределена.") . "<br>";
+echo ((CONSTANT == 'new constant') ? 'Константа переопределена и равна: '
+        . CONSTANT : 'Константа не переопределена.') . '<br>';
 
 echo '<br>';
 
 // #4
 $age = 25;
 if ($age >= 18 && $age <= 65) {
-    echo "Вам еще работать и работать";// Двойные кавычки избыточны
+    echo 'Вам еще работать и работать';// Двойные кавычки избыточны
 } elseif ($age > 65) { // так не читабельно надо разделять пробелами
-    echo "Вам пора на пенсию";
+    echo 'Вам пора на пенсию';
 } elseif ($age >= 1 && $age<=17) {
-    echo "Вам ещё рано работать";
+    echo 'Вам ещё рано работать';
 } else {
-    echo "Неизвестный возраст";
+    echo 'Неизвестный возраст';
 }
-echo "<br>";
+echo '<br>';
 
-echo "<br>";
+echo '<br>';
 
 // #5
 $day = 6;
@@ -67,18 +67,18 @@ switch ($day) {
     case 3:
     case 4:
     case 5:
-        echo "Это рабочий день";
+        echo 'Это рабочий день';
         break;
     case 6:
     case 7:
-        echo "Это выходной день";
+        echo 'Это выходной день';
         break;
     default:
-        echo "Неизвестный день";
+        echo 'Неизвестный день';
 }
-echo "<br>";
+echo '<br>';
 
-echo "<br>";
+echo '<br>';
 
 // #6
 
@@ -93,7 +93,7 @@ $bmw['year']  = 2015;
 /**
  * Toyota
  */
-$toyota['model'] = "RAV 4";
+$toyota['model'] = 'RAV 4';
 $toyota['speed'] = 130;
 $toyota['doors'] = 3;
 $toyota['year'] = 2014;
@@ -101,7 +101,7 @@ $toyota['year'] = 2014;
 /**
  * Opel
  */
-$opel['model'] = "Astra";
+$opel['model'] = 'Astra';
 $opel['speed'] = 110;
 $opel['doors'] = 4;
 $opel['year'] = 2010;
@@ -113,14 +113,14 @@ $cars = [
 ];
 
 foreach ($cars as $car) {
-    echo "CAR " . $car['car_name'] . "<br>";
+    echo 'CAR ' . $car['car_name'] . '<br>';
     foreach ($car['params'] as $param) {
         echo $param . ' ';
     }
-    echo "<br>";
+    echo '<br>';
 }
 
-echo "<br>";
+echo '<br>';
 
 // #7
 for ($x=1; $x<=10; $x++) {
@@ -133,20 +133,20 @@ for ($x=1; $x<=10; $x++) {
         } else {
             $bracket = ['', ''];
         }
-        echo " " . $bracket[0] . $result . $bracket[1] . " ";
+        echo ' ' . $bracket[0] . $result . $bracket[1] . ' ';
     }
-    echo "<br>";
+    echo '<br>';
 }
 //в скобки надо заключить только результат,у тебя числа которые переумножаются тоже в скобках
-echo "<br>";
+echo '<br>';
 
 // #8
-$str = "На улице хорошая погода";
+$str = 'На улице хорошая погода';
 echo $str;
 echo '<br>';
 $str_array = explode(' ', $str);
 print_r($str_array);
-echo "<br>";
+echo '<br>';
 $elements = count($str_array);
 $index    = 0;
 $reverse_array = [];
