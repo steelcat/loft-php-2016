@@ -135,3 +135,39 @@ multi_table(3, 4.5); // not correct
 echo '<br>';
 
 echo '<br><br>';
+
+// #5
+/**
+ * @param $str
+ * @return bool
+ */
+function palindrom($str)
+{
+    $str_rev = "";
+    for ($i = mb_strlen($str, "UTF-8"); $i >= 0; $i--) {
+        $str_rev = $str_rev . mb_substr($str, $i, 1, "UTF-8");
+    }
+    return ($str === $str_rev);
+}
+
+/**
+ * @param $str
+ */
+function palindrom_echo($str)
+{
+    if (palindrom($str)) {
+        echo "Строка является палиндромом";
+    } else {
+        echo "Строка не является палиндромом";
+    }
+}
+
+/**
+ * Test
+ */
+palindrom_echo('шабаш'); // true
+echo '<br>';
+palindrom_echo('шабашка'); // false
+echo '<br>';
+
+echo '<br><br>';
