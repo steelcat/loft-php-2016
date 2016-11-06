@@ -46,7 +46,7 @@ function arr_to_arithmetic($digits_arr, $arithmetic)
     $result = 0;
     try {
         foreach ($digits_arr as $digit) {
-            if (is_int($digit)) {
+            if (is_numeric($digit)) {
                 switch ($arithmetic) {
                     case '+':
                         $result = $result + $digit;
@@ -77,7 +77,7 @@ function arr_to_arithmetic($digits_arr, $arithmetic)
 /**
  * Test of arr_to_arithmetic function
  */
-arr_to_arithmetic([1, 2, 3, 4, 5], '+'); // correct
+arr_to_arithmetic([1, 2, 3, 4.5, 5], '+'); // correct
 echo '<br>';
 arr_to_arithmetic([1, 2, false, 4, 5], '+'); // not correct, not correct digit
 echo '<br>';
