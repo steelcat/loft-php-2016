@@ -224,3 +224,21 @@ packets($str);
 echo '<br>';
 
 echo '<br><br>';
+
+// #9
+function get_content_of_file($file_name)
+{
+    if (file_exists($file_name) && is_file($file_name)) {
+        $result = file_get_contents($file_name);
+    } else {
+        $result = "Файл не существует";
+    }
+    echo $result;
+}
+
+/**
+ * Test
+ */
+get_content_of_file('test.txt');
+
+echo '<br><br>';
