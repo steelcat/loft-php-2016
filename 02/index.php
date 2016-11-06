@@ -171,3 +171,11 @@ palindrom_echo('шабашка'); // false
 echo '<br>';
 
 echo '<br><br>';
+
+// #6
+echo date("d.m.Y H:i");
+echo '<br>';
+echo strtotime("24.02.2016 00:00:00");
+echo '<br>';
+
+echo '<br><br>';
