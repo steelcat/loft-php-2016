@@ -1,6 +1,13 @@
 <?php
 // #1
+$xml_data = simplexml_load_file('data.xml');
+echo 'Purchase Order Number : ' . $xml_data["PurchaseOrderNumber"] . '<br>';
+echo 'Order Date : ' . $xml_data["OrderDate"] . '<br>';
+echo '-----<br>';
+echo 'Shipping Address : ' . $xml_data->Address[0] . '<br>';
 
+
+echo '<br><br>';
 
 // #4
 $curl = curl_init();
