@@ -33,19 +33,26 @@ function page_register()
 /**
  * @return string
  */
-function page_profile($picture)
+function page_profile($page_data)
 {
-    return '<form method="post" enctype="multipart/form-data">
-                <fieldset>
-                    <legend>Профиль</legend>
-                    <p><label for="name">Имя</label><input type="text" name="name" id="name"></p>
-                    <p><label for="age">Возраст</label><input type="number" name="age" id="age"></p>
-                    <p><label for="about">О себе</label><textarea rows="3" name="about" id="about"></textarea></p>
-                    <p><label for="picture">Фотография</label><input type="file" name="picture" id="picture"></p>
-                    <p><input type="submit" name="update"  value="Сохранить профиль"></p>
-                </fieldset>
-            </form>
-            <form method="post">
-                <input type="submit" name="logout" value="Выход">
-            </form>';
+    $image_print = '';
+    if ($page_data['picture']) {
+        $image_print = '<img src="photos/' . $page_data['picture'] . '">';
+    }
+    return '
+    <form method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Профиль</legend>
+            <p><label for="name">Имя</label><input type="text" name="name" id="name" value="' . $page_data['name'] . '"></p>
+            <p><label for="age">Возраст</label><input type="number" name="age" id="age" value="' . $page_data['age'] . '"></p>
+            <p><label for="about">О себе</label><textarea rows="3" name="about" id="about">' . $page_data['about'] . '</textarea></p>
+            <p><label for="picture">Фотография</label><input type="file" name="picture" id="picture"></p>'
+            . $image_print
+            . '<p><input type="submit" name="update"  value="Сохранить профиль"></p>
+        </fieldset>
+    </form>
+    <form method="post">
+        <input type="submit" name="logout" value="Выход">
+    </form>
+';
 }

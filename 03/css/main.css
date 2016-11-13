@@ -1,0 +1,25 @@
+body {
+    padding: 3rem;
+}
+
+form {
+    text-align: center;
+}
+
+label {
+    margin-right: 1rem;
+}
+
+input {
+    display: inline-block;
+}
+
+input[type="file"] {
+    display: inline-block;
+}
+
+.error {
+    margin-top: 3rem;
+    color: red;
+    text-align: center;
+}

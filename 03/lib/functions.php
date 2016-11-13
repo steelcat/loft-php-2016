@@ -84,20 +84,61 @@ function logout()
     return false;
 }
 
+/**
+ *
+ */
 function update()
 {
+        $id = $_SESSION['id'];
+        $input_name = $_POST['name'] ? strip_tags($_POST['name']) : null;
+        $input_age = $_POST['age'] ? strip_tags($_POST['age']) : null;
+        $input_about = $_POST['about'] ? strip_tags($_POST['about']) : null;
+        $input_file = empty($_FILES['picture']) ? null : $_FILES['picture'];
+        $input_file_tmp = empty($input_file['tmp_name']) ? null : $input_file['tmp_name'];
+        $input_file_ext = strtolower(pathinfo($input_file['name'], PATHINFO_EXTENSION));
+        $output_file_name = $id . '-' . uniqid() . '-' . time() . '.' . $input_file_ext;
+        $output_file = UPLOAD_DIR . $output_file_name;
+        move_uploaded_file($input_file_tmp, $output_file);
+        $db = db_connect('localhost', 'loft-php-03');
+        $query = $db->prepare('UPDATE users SET name = :name, age = :age,
+                about = :about, picture = :picture WHERE id = :id');
+        $query->execute(['name' => $input_name, 'age' => $input_age,
+                'about' => $input_about, 'picture' => $output_file_name, 'id' => $id]);
+        header('Location: /');
+}
+
+/**
+ * @return mixed
+ */
+function profile()
+{
     $id = $_SESSION['id'];
-    $input_name = $_POST['name'] ? strip_tags($_POST['name']) : null;
-    $input_age = $_POST['age'] ? strip_tags($_POST['age']) : null;
-    $input_about = $_POST['about'] ? strip_tags($_POST['about']) : null;
-    $input_file = empty($_FILES['picture']) ? null : $_FILES['picture'];
-    $input_file_tmp = empty($input_file['tmp_name']) ? null : $input_file['tmp_name'];
-    $input_file_ext = strtolower(pathinfo($input_file['name'], PATHINFO_EXTENSION));
-    $output_file_name = $id . '-' . uniqid() . '-' . time() . '.' . $input_file_ext;
-    $output_file = UPLOAD_DIR . $output_file_name;
-    move_uploaded_file($input_file_tmp, $output_file);
     $db = db_connect('localhost', 'loft-php-03');
-    $query = $db->prepare('UPDATE users SET name = :name, age = :age, about = :about, picture = :picture WHERE id = :id');
-    $query->execute(['name' => $input_name, 'age' => $input_age, 'about' => $input_about, 'picture' => $output_file_name, 'id' => $id]);
-    header('Location: /');
+    $query = $db->prepare("SELECT * FROM users WHERE id = $id");
+    $query->execute();
+    $user = $query->fetch();
+    return $user;
+}
+
+/**
+ * @param string $page
+ */
+function page($page = '')
+{
+    echo "  <!doctype html>
+                <head>
+                    <meta charset=\"utf-8\">
+                    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">
+                    <title>Задание 3</title>
+                    <meta name=\"description\" content=\"\">
+                    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+                    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">
+                    <link rel=\"stylesheet\" href=\"css/main.css\">
+                </head>
+                <body>
+                    <div class=\"container\">
+                        $page
+                    </div>
+                </body>
+            </html>";
 }
