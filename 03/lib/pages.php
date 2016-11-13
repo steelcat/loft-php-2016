@@ -33,15 +33,15 @@ function page_register()
 /**
  * @return string
  */
-function page_profile()
+function page_profile($picture)
 {
-    return '<form method="post">
+    return '<form method="post" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Профиль</legend>
                     <p><label for="name">Имя</label><input type="text" name="name" id="name"></p>
                     <p><label for="age">Возраст</label><input type="number" name="age" id="age"></p>
                     <p><label for="about">О себе</label><textarea rows="3" name="about" id="about"></textarea></p>
-                    <p><label for="picture">Картинка</label><input type="file" name="picture" id="picture"></p>
+                    <p><label for="picture">Фотография</label><input type="file" name="picture" id="picture"></p>
                     <p><input type="submit" name="update"  value="Сохранить профиль"></p>
                 </fieldset>
             </form>
