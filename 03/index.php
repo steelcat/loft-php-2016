@@ -1,6 +1,6 @@
 <?php
 require_once 'lib/functions.php';
-require_once 'lib/pages.php';
+require_once 'data/pages.php';
 
 define('UPLOAD_DIR', __DIR__ . '/photos/');
 define('IMG_EXTS', ['jpg', 'jpeg', 'png', 'gif']);
