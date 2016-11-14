@@ -18,6 +18,55 @@ input[type="file"] {
     display: inline-block;
 }
 
+img {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
+
+.clearfix:after {
+    content:"";
+    display:block;
+    clear:both;
+}
+
+.admin-list {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-item {
+    border: solid 1px #eee;
+    margin-bottom: 1rem;
+    list-style: none;
+    min-height: 100px;
+}
+
+.admin-image {
+    padding: 1rem;
+    width: 25%;
+    float: left;
+}
+
+.admin-image-name {
+    float: left;
+    width: 40%;
+}
+
+.admin-image-ext {
+    float: left;
+    width: 5%;
+}
+
+.admin-image-del {
+    float: left;
+    width: 20%;
+    cursor: pointer;
+    color: red;
+    font-weight: 700;
+}
+
 .error {
     margin-top: 3rem;
     color: red;

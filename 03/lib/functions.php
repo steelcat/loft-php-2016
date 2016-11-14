@@ -22,6 +22,15 @@ function db_connect($db_host, $db_name, $db_username = 'root', $db_password = ''
 }
 
 /**
+ * @param $file_name_with_ext
+ * @return string
+ */
+function get_file_ext($file_name_with_ext)
+{
+    return substr($file_name_with_ext, strrpos($file_name_with_ext, '.') + 1);
+}
+
+/**
  * @return bool|string
  */
 function login()
@@ -89,22 +98,24 @@ function logout()
  */
 function update()
 {
-        $id = $_SESSION['id'];
-        $input_name = $_POST['name'] ? strip_tags($_POST['name']) : null;
-        $input_age = $_POST['age'] ? strip_tags($_POST['age']) : null;
-        $input_about = $_POST['about'] ? strip_tags($_POST['about']) : null;
-        $input_file = empty($_FILES['picture']) ? null : $_FILES['picture'];
+    $id = $_SESSION['id'];
+    $input_name = $_POST['name'] ? htmlentities(strip_tags(trim($_POST['name']))) : null;
+    $input_age = $_POST['age'] ? htmlentities(strip_tags(trim($_POST['age']))) : null;
+    $input_about = $_POST['about'] ? htmlentities(strip_tags(trim($_POST['about']))) : null;
+    $input_file = $_FILES['picture']['size'] ? $_FILES['picture'] : null;
+    $db = db_connect('localhost', 'loft-php-03');
+    if ($input_file) {
         $input_file_tmp = empty($input_file['tmp_name']) ? null : $input_file['tmp_name'];
         $input_file_ext = strtolower(pathinfo($input_file['name'], PATHINFO_EXTENSION));
         $output_file_name = $id . '-' . uniqid() . '-' . time() . '.' . $input_file_ext;
         $output_file = UPLOAD_DIR . $output_file_name;
         move_uploaded_file($input_file_tmp, $output_file);
-        $db = db_connect('localhost', 'loft-php-03');
-        $query = $db->prepare('UPDATE users SET name = :name, age = :age,
-                about = :about, picture = :picture WHERE id = :id');
-        $query->execute(['name' => $input_name, 'age' => $input_age,
-                'about' => $input_about, 'picture' => $output_file_name, 'id' => $id]);
-        header('Location: /');
+        $query = $db->prepare('UPDATE users SET picture = :picture WHERE id = :id');
+        $query->execute(['picture' => $output_file_name, 'id' => $id]);
+    }
+    $query = $db->prepare('UPDATE users SET name = :name, age = :age, about = :about WHERE id = :id');
+    $query->execute(['name' => $input_name, 'age' => $input_age, 'about' => $input_about, 'id' => $id]);
+    header('Location: /');
 }
 
 /**
@@ -121,24 +132,49 @@ function profile()
 }
 
 /**
+ * @return mixed
+ */
+function admin()
+{
+    $id = $_SESSION['id'];
+    $db = db_connect('localhost', 'loft-php-03');
+    $query = $db->prepare("SELECT id,picture FROM users");
+    $query->execute();
+    $pictures = $query->fetchAll();
+    return $pictures;
+}
+
+/**
+ *
+ */
+function admin_update()
+{
+
+}
+
+/**
  * @param string $page
  */
 function page($page = '')
 {
-    echo "  <!doctype html>
-                <head>
-                    <meta charset=\"utf-8\">
-                    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">
-                    <title>Задание 3</title>
-                    <meta name=\"description\" content=\"\">
-                    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-                    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">
-                    <link rel=\"stylesheet\" href=\"css/main.css\">
-                </head>
-                <body>
-                    <div class=\"container\">
-                        $page
-                    </div>
-                </body>
-            </html>";
+    echo "
+        <!doctype html>
+            <head>
+                <meta charset=\"utf-8\">
+                <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">
+                <title>Задание 3</title>
+                <meta name=\"description\" content=\"\">
+                <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+                <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">
+                <link rel=\"stylesheet\" href=\"css/main.css\">
+            </head>
+            <body>
+                <div class=\"container\">
+                    $page
+                </div>
+                <script src=\"//code.jquery.com/jquery-3.1.1.min.js\"></script>
+                <script src=\"js/main.js\"></script>
+            </body>
+        </html>
+    ";
 }
