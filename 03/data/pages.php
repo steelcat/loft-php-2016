@@ -74,7 +74,7 @@ function page_admin($admin_data)
         $image_file = 'photos/' . $image['picture'];
         $image_ext = get_file_ext($image['picture']);
         $image_filename = basename($image['picture'], '.' . $image_ext);
-        if (file_exists($image_file) && is_file($image_file)) {
+        if (file_exists(iconv("UTF-8", "CP1251", $image_file)) && is_file(iconv("UTF-8", "CP1251", $image_file))) {
             $images_print .= '
             <li class="admin-item clearfix">
             <img class="admin-image" src="' . $image_file . '">

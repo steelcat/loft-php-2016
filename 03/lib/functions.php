@@ -149,7 +149,24 @@ function admin()
  */
 function admin_update()
 {
-
+    array_pop($_POST);
+    $db = db_connect('localhost', 'loft-php-03');
+    $query = $db->prepare("SELECT id,picture FROM users");
+    $query->execute();
+    $original_pictures = $query->fetchAll();
+    foreach ($original_pictures as $original_picture) {
+        $new_image = null;
+        $query = $db->prepare('UPDATE users SET picture = :picture WHERE id = :id');
+        if ($_POST[$original_picture['id']]) {
+            $new_image = $_POST[$original_picture['id']] . '.' . get_file_ext($original_picture['picture']);
+            rename(UPLOAD_DIR . $original_picture['picture'], UPLOAD_DIR . iconv("UTF-8", "CP1251", $new_image));
+        } else {
+            if (file_exists(UPLOAD_DIR . $original_picture['picture']) && is_file(UPLOAD_DIR . $original_picture['picture'])) {
+                unlink(UPLOAD_DIR . $original_picture['picture']);
+            }
+        }
+        $query->execute(['picture' => $new_image, 'id' => $original_picture['id']]);
+    }
 }
 
 /**
