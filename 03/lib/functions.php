@@ -98,6 +98,8 @@ function logout()
  */
 function update()
 {
+    $img_ext = ['jpg', 'jpeg', 'png', 'gif'];
+    $img_mime = ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
     $id = $_SESSION['id'];
     $input_name = $_POST['name'] ? htmlentities(strip_tags(trim($_POST['name']))) : null;
     $input_age = $_POST['age'] ? htmlentities(strip_tags(trim($_POST['age']))) : null;
@@ -105,13 +107,26 @@ function update()
     $input_file = $_FILES['picture']['size'] ? $_FILES['picture'] : null;
     $db = db_connect('localhost', 'loft-php-03');
     if ($input_file) {
-        $input_file_tmp = empty($input_file['tmp_name']) ? null : $input_file['tmp_name'];
-        $input_file_ext = strtolower(pathinfo($input_file['name'], PATHINFO_EXTENSION));
-        $output_file_name = $id . '-' . uniqid() . '-' . time() . '.' . $input_file_ext;
-        $output_file = UPLOAD_DIR . $output_file_name;
-        move_uploaded_file($input_file_tmp, $output_file);
-        $query = $db->prepare('UPDATE users SET picture = :picture WHERE id = :id');
-        $query->execute(['picture' => $output_file_name, 'id' => $id]);
+        $ext = get_file_ext($input_file['name']);
+        $filename = $input_file['name'];
+        $filetype = $input_file['type'];
+        $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        if ($input_file['error'] !== UPLOAD_ERR_OK) {
+            $error = "Ошибка при загрузке файла";
+            return $error;
+        } elseif (!in_array($ext, $img_ext) || (!in_array($filetype, $img_mime))) {
+            $error = "Допустима загрузка только файлов изображений";
+            return $error;
+        } else {
+            $input_file_tmp = empty($input_file['tmp_name']) ? null : $input_file['tmp_name'];
+            $input_file_ext = strtolower(pathinfo($input_file['name'], PATHINFO_EXTENSION));
+            $output_file_name = $id . '-' . uniqid() . '-' . time() . '.' . $input_file_ext;
+            $output_file = UPLOAD_DIR . $output_file_name;
+            move_uploaded_file($input_file_tmp, $output_file);
+            $query = $db->prepare('UPDATE users SET picture = :picture WHERE id = :id');
+            $query->execute(['picture' => $output_file_name, 'id' => $id]);
+        }
+
     }
     $query = $db->prepare('UPDATE users SET name = :name, age = :age, about = :about WHERE id = :id');
     $query->execute(['name' => $input_name, 'age' => $input_age, 'about' => $input_about, 'id' => $id]);

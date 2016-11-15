@@ -20,9 +20,9 @@ if (empty($_SESSION['id'])) {
         . '</div>';
 } else {
     if (isset($_POST['logout'])) {
-        logout();
+        $error = logout();
     } elseif (isset($_POST['update'])) {
-        update();
+        $error = update();
     } elseif (isset($_POST['admin'])) {
         admin_update();
     }
