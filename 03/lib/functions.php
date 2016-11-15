@@ -158,10 +158,12 @@ function admin_update()
         $new_image = null;
         $query = $db->prepare('UPDATE users SET picture = :picture WHERE id = :id');
         if ($_POST[$original_picture['id']]) {
-            $new_image = $_POST[$original_picture['id']] . '.' . get_file_ext($original_picture['picture']);
+            $new_image = htmlentities(strip_tags(trim($_POST[$original_picture['id']])))
+                . '.' . get_file_ext($original_picture['picture']);
             rename(UPLOAD_DIR . $original_picture['picture'], UPLOAD_DIR . iconv("UTF-8", "CP1251", $new_image));
         } else {
-            if (file_exists(UPLOAD_DIR . $original_picture['picture']) && is_file(UPLOAD_DIR . $original_picture['picture'])) {
+            if (file_exists(UPLOAD_DIR . $original_picture['picture'])
+                && is_file(UPLOAD_DIR . $original_picture['picture'])) {
                 unlink(UPLOAD_DIR . $original_picture['picture']);
             }
         }
