@@ -34,6 +34,6 @@ if (empty($_SESSION['id'])) {
         . '</div>';
 }
 if ($error) {
-    $page .= "<div class='row'><div class='error'>$error</div></div>";
+    $page .= "<div class='row'><div class='error'>{$error}</div></div>";
 }
 page($page);

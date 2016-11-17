@@ -34,7 +34,89 @@ foreach ($items as $item) {
     echo '<br>';
 }
 
+echo '<br><br>';
 
+// #2
+$first_array = [
+    'Петя' => [
+        'Пол' => 1,
+        'Возраст' => 18,
+        'Интересы' => [
+            'Преферанс', 'PHP'
+        ]
+    ],
+    'Вася' => [
+        'Пол' => 1,
+        'Возраст' => 22
+    ],
+    'Маша' => [
+        'Пол' => 0,
+        'Возраст' => 17,
+        'Интересы' => [
+            'Вязание', 'Взлом банкоматов'
+        ]
+    ]
+];
+
+$first_array_json = json_encode($first_array, JSON_UNESCAPED_UNICODE);
+file_put_contents('output.json', $first_array_json);
+
+$changed_array_json = file_get_contents('output.json');
+$changed_array = json_decode($changed_array_json, true);
+if (1) {
+    $changed_array['Петя'] = [
+        'Пол' => 0,
+        'Возраст' => 33,
+        'Интересы' => [
+            'Дурак', 'JS'
+        ]
+    ];
+}
+$changed_array_json = json_encode($changed_array, JSON_UNESCAPED_UNICODE);
+file_put_contents('output2.json', $changed_array_json);
+
+$first_array_json = file_get_contents('output.json');
+$first_array = json_decode($first_array_json, true);
+
+$second_array_json = file_get_contents('output2.json');
+$second_array = json_decode($changed_array_json, true);
+
+foreach ($first_array as $key => $item) {
+    echo 'У человека по имени ' . $key;
+    if ($first_array[$key] && $second_array[$key]) {
+        $diff = $first_array[$key] != $second_array[$key];
+        if ($diff) {
+            echo ' изменилось: ';
+            print_r($second_array[$key]);
+        } else {
+            echo ' ничего не изменилось.';
+        }
+    } else {
+        echo "элемент отсутствует.";
+    }
+    echo '<br>';
+}
+
+echo '<br><br>';
+
+// #3
+$array = [];
+for ($i = 0; $i <= 50; $i++) {
+    $array[$i] = rand(1, 100);
+}
+$fp = fopen('file.csv', 'w');
+fputcsv($fp, $array, ',', '"');
+fclose($fp);
+$file_content = file_get_contents('file.csv');
+$next_array = explode(',', $file_content);
+$summa = 0;
+foreach ($next_array as $num) {
+    $num = (int) $num;
+    if (!($num % 2)) {
+        $summa += $num;
+    }
+}
+echo "Сумма четных чисел: {$summa}<br>";
 
 echo '<br><br>';
 
