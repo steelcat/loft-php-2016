@@ -1,0 +1,19 @@
+{
+    "name": "loft-php-2016/05",
+    "description": "Project for task 5",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Steelcat",
+            "email": "steelpuppy@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app"
+        }
+    },
+    "require": {
+        "twig/twig": "^1.28"
+    }
+}
