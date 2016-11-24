@@ -58,7 +58,7 @@ class UserModel extends Model
     public function allUsers()
     {
         $db = $this->db;
-        $query = $db->prepare("SELECT * FROM users");
+        $query = $db->prepare("SELECT * FROM users ORDER BY age ASC");
         $query->execute();
         $users = $query->fetchAll();
         return $users;
