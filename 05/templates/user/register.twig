@@ -1,0 +1,12 @@
+{% extends "base.twig" %}
+{% block content %}
+    <form id="register" method="post">
+        <fieldset>
+            <legend>Регистрация</legend>
+            <p><label for="reglogin">Логин</label><input type="text" name="reglogin" id="reglogin"></p>
+            <p><label for="regpassword">Пароль</label><input type="password" name="regpassword" id="regpassword"></p>
+            <p><input type="submit" name="submit" value="Зарегистрироваться"></p>
+            <input type="hidden" name="form_action" value="register">
+        </fieldset>
+    </form>
+{% endblock %}

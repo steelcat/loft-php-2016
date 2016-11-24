@@ -1,24 +1,23 @@
 <?php
-/**
- * Project: loft-php-2016
- * Author: Zorca (vs@zorca.org)
- */
-
 namespace App;
-
 
 class View
 {
-    public static function show($router)
+    public static function show($pageName, $pageDataInput = [])
     {
-        $template = mb_strtolower($router['controllerName']) . DS . $router['pageName'] . '.twig';
-        if (!file_exists(TEMPLATES . $template)) {
-            $template = '404.twig';
-            header('HTTP/1.1 404 Not Found');
-            header('Status: 404 Not Found');
+        $params = [];
+        $pageDataOutput = [];
+        if (APP_CACHE) {
+            $params += ['cache' => CACHE];
         }
+        if (APP_DEBUG) {
+            $params += ['debug' => true];
+        }
+        $template = $pageName . '.twig';
         $templates = new \Twig_Loader_Filesystem(TEMPLATES);
-        $twig = new \Twig_Environment($templates);
-        echo $twig->render($template, $router);
+        $twig = new \Twig_Environment($templates, $params);
+        $twig->addExtension(new \Twig_Extension_Debug());
+        $pageDataOutput += $pageDataInput;
+        echo $twig->render($template, $pageDataOutput);
     }
 }

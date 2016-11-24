@@ -1,36 +1,22 @@
 <?php
 namespace App;
 
-/**
- * Class App (Singleton Pattern)
- * @package App
- */
 class App
 {
     protected static $instance = null;
 
-    private static $config = null;
-    private static $auth = false;
     private static $post = null;
+    private static $error = null;
 
     protected function __construct()
     {
-        self::$config = (file_exists(BASE . 'config.php')) ? require BASE . 'config.php' : null;
-        self::$auth = (bool) Session::get('id');
         self::$post = $_POST;
-    }
 
-    public static function getConfig($key)
-    {
-        if (!empty(self::$config[$key])) {
-            return self::$config[$key];
+        $routerResponse = Router::get();
+        $controller = '\\App\\Controllers\\' . ucfirst($routerResponse['controllerName']) . 'Controller';
+        if (class_exists($controller)) {
+            new $controller($routerResponse);
         }
-        return null;
-    }
-
-    public static function isAuth()
-    {
-        return self::$auth;
     }
 
     public static function getPost($key)
@@ -39,6 +25,33 @@ class App
             return self::$post[$key];
         }
         return null;
+    }
+
+    public static function existsPost($key)
+    {
+        if (!empty(self::$post[$key])) {
+            return isset(self::$post[$key]);
+        }
+        return false;
+    }
+
+
+    public static function getPostAll()
+    {
+        if (!empty(self::$post)) {
+            return self::$post;
+        }
+        return null;
+    }
+
+    public static function getError()
+    {
+        return self::$error;
+    }
+
+    public static function setError($error)
+    {
+        self::$error = $error;
     }
 
     public static function run()

@@ -1,4 +1,27 @@
 {% extends "base.twig" %}
 {% block content %}
-    USER
+<h1>Профиль</h1>
+<div class="col-xs-6">
+    <img class="avatar" src="/images/{{ user['avatar'] }}">
+</div>
+<div class="col-xs-6">
+    <form method="post" enctype="multipart/form-data">
+        <fieldset>
+            <p><label for="name">Имя</label>
+                <input type="text" name="name" id="name" value="{{ user['name'] }}"></p>
+            <p><label for="age">Возраст</label>
+                <input type="number" name="age" id="age" value="{{ user['age'] }}"></p>
+            <p><label for="about">О себе</label>
+                <textarea rows="3" name="about" id="about">{{ user['about'] }}</textarea></p>
+            <p><label for="picture">Фотография</label>
+                <input type="file" name="picture" id="picture" value="{{ user['avatar'] }}"></p>
+            <p><input type="submit" name="update" value="Сохранить профиль"></p>
+            <input type="hidden" name="form_action" value="update">
+        </fieldset>
+    </form>
+    <form method="post">
+        <input type="submit" name="logout" value="Выход">
+        <input type="hidden" name="form_action" value="logout">
+    </form>
+</div>
 {% endblock %}

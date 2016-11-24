@@ -1,0 +1,22 @@
+.main {
+    padding: 10rem 0;
+    text-align: center;
+}
+
+input[type="file"] {
+    display: inline-block;
+}
+
+.avatar {
+    width: 100%;
+    height: auto;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
+
+.debugbar {
+    border: solid 1px red;
+}

@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Дамп данных таблицы loft-php-03.users: ~7 rows (приблизительно)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `login`, `password`, `name`, `age`, `about`, `picture`) VALUES
+INSERT INTO `users` (`id`, `login`, `password`, `name`, `age`, `about`, avatar) VALUES
 	(1, 'vitaly', 'password', 'Виталик', 43, 'Обо мне', '1-582a00629f9c0.jpg'),
 	(2, 'user', 'user', NULL, NULL, NULL, NULL),
 	(3, 'new', 'newnew', 'Толик', 18, 'Толян', '3-582a00a7d399e-14791.jpg'),

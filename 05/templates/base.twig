@@ -1,12 +1,24 @@
 <!doctype html>
 <html lang="ru">
 <head>
+    <title>Задание №5</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
-    <div>Контроллер: {{ controllerName }}</div>
-    <div>Страница: {{ pageName }}</div>
-    <div>Экшен: {{ actionName }}</div>
-    {% block content %}
-    {% endblock %}
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    {% if error %}
+        <div class="error container">{{ error }}</div>
+    {% endif %}
+    <div class="debugbar container">Debug:<pre>{{ dump() }}</pre></div>
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="/assets/js/main.js"></script>
 </body>
 </html>
