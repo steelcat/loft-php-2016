@@ -57,6 +57,31 @@ class UserController extends Controller
         View::show('user/files', ['userFiles' => $userFiles]);
     }
 
+    public function actionAllusers()
+    {
+        $userModel = new UserModel('localhost', 'loft-php-05');
+        $users = $userModel->allUsers();
+        foreach ($users as $user) {
+            if ($user['age'] > 18) {
+                $user['adult'] = "Совершеннолетний";
+            } else {
+                $user['adult'] = "Несовершеннолетний";
+            }
+        }
+
+        for ($i=0; $i<count($users); $i++) {
+            if (!isset($users[$i]['age'])) {
+                $users[$i]['adult'] = "Возраст не указан";
+            } elseif ($users[$i]['age'] > 18) {
+                $users[$i]['adult'] = "Совершеннолетний";
+            } else {
+                $users[$i]['adult'] = "Несовершеннолетний";
+            }
+        }
+
+        View::show('user/allusers', ['users' => $users]);
+    }
+
     public function formActionLogin()
     {
         $login = App::existsPost('login') ? Sanitize::input(App::getPost('login')) : false;

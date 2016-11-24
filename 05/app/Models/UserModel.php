@@ -51,7 +51,16 @@ class UserModel extends Model
         $db = $this->db;
         $query = $db->prepare("SELECT * FROM images WHERE user_id = :user_id");
         $query->execute(['user_id' => $user_id]);
-        $userFiles = $query->fetch();
+        $userFiles = $query->fetchAll();
         return $userFiles;
+    }
+
+    public function allUsers()
+    {
+        $db = $this->db;
+        $query = $db->prepare("SELECT * FROM users");
+        $query->execute();
+        $users = $query->fetchAll();
+        return $users;
     }
 }

@@ -6,14 +6,18 @@
     <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
-    <div class="main">
+    <header>
+        {% block menu %}
+        {% endblock %}
+    </header>
+    <main class="main">
         <div class="container">
             <div class="row">
                 {% block content %}
                 {% endblock %}
             </div>
         </div>
-    </div>
+    </main>
     {% if error %}
         <div class="error container">{{ error }}</div>
     {% endif %}

@@ -1,8 +1,22 @@
 {% extends "base.twig" %}
+{% block menu %}
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Задание номер 5</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/user/index">Профиль</a></li>
+                <li><a href="/user/files">Файлы пользователя</a></li>
+                <li><a href="/user/allusers">Все пользователи</a></li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
 {% block content %}
 <h1>Профиль</h1>
 <div class="col-xs-6">
-    <img class="avatar" src="/images/{{ user['avatar'] }}">
+    <img class="image-avatar" src="/images/{{ user['avatar'] }}">
 </div>
 <div class="col-xs-6">
     <form method="post" enctype="multipart/form-data">

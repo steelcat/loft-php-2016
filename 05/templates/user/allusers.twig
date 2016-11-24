@@ -14,11 +14,11 @@
     </nav>
 {% endblock %}
 {% block content %}
-    <h1>Файлы пользователя</h1>
-    <table class="table">
-        <tr><th>ID картинки</th><th>Имя картинки</th><th>Картинка</th></tr>
-        {% for userFile in userFiles %}
-            <tr><td>{{ userFile.id }}</td><td>{{ userFile.image }}</td><td><img class="image-small" src="/images/{{ userFile.image }}"></td></tr>
+    <h1>Все пользователи</h1>
+    <table class="table table-striped">
+        <tr><th>ID</th><th>Имя</th><th>Возраст</th><th>Совершеннолетие</th><th>Инфо</th><th>Аватар</th></tr>
+        {% for user in users %}
+            <tr><td>{{ user.id }}</td><td>{{ user.name }}</td><td>{{ user.age }}</td><td>{{ user.adult }}</td><td>{{ user.about }}</td><td><img class="image-small" src="/images/{{ user.avatar }}"></td></tr>
         {% endfor %}
     </table>
 {% endblock %}
