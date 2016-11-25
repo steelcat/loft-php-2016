@@ -88,6 +88,8 @@ class UserController extends Controller
         $password = App::existsPost('password') ? Sanitize::input(App::getPost('password')) : false;
         if ($login && $password) {
             $userModel = new UserModel('localhost', 'loft-php-05');
+            //название фиксированы в контроллере
+            //что будет если название поменяется или например хост
             $user = $userModel->login($login);
             if ($user['login'] === $login && $user['password'] === $password) {
                 Session::set('id', $user['id']);
@@ -102,11 +104,13 @@ class UserController extends Controller
 
     public function formActionRegister()
     {
-        $reglogin = App::existsPost('reglogin') ? Sanitize::input(App::getPost('reglogin')) : false;
+        $reglogin    = App::existsPost('reglogin') ? Sanitize::input(App::getPost('reglogin')) : false;
         $regpassword = App::existsPost('regpassword') ? Sanitize::input(App::getPost('regpassword')) : false;
+        //Надо визульно логически разделять код легче читать так
         if ($reglogin && $regpassword) {
             $userModel = new UserModel('localhost', 'loft-php-05');
-            $user = $userModel->login($reglogin);
+            $user      = $userModel->login($reglogin);
+
             if ($user['login'] != $reglogin) {
                 $userModel->register($reglogin, $regpassword);
                 header('Location: /user/index');
@@ -118,30 +122,33 @@ class UserController extends Controller
 
     public function formActionUpdate()
     {
-        $img_ext = ['jpg', 'jpeg', 'png', 'gif'];
+        $img_ext  = ['jpg', 'jpeg', 'png', 'gif'];
         $img_mime = ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
-        $id = Session::get('id');
-        $input_name = $_POST['name'] ? Sanitize::input(App::getPost('name')) : null;
-        $input_age = $_POST['age'] ? Sanitize::input(App::getPost('age')) : null;
+        $id       = Session::get('id');
+
+        $input_name  = $_POST['name'] ? Sanitize::input(App::getPost('name')) : null;
+        $input_age   = $_POST['age'] ? Sanitize::input(App::getPost('age')) : null;
         $input_about = $_POST['about'] ? Sanitize::input(App::getPost('about')) : null;
-        $input_file = $_FILES['picture']['size'] ? $_FILES['picture'] : null;
-        $userModel = new UserModel('localhost', 'loft-php-05');
+        $input_file  = $_FILES['picture']['size'] ? $_FILES['picture'] : null;
+        $userModel   = new UserModel('localhost', 'loft-php-05');
+
         if ($input_file) {
-            $ext = File::ext($input_file['name']);
             $filename = $input_file['name'];
             $filetype = $input_file['type'];
-            $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+            $ext      = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
             if ($input_file['error'] !== UPLOAD_ERR_OK) {
-                $error = "Ошибка при загрузке файла";
+                $error = 'Ошибка при загрузке файла';
                 return $error;
             } elseif (!in_array($ext, $img_ext) || (!in_array($filetype, $img_mime))) {
-                $error = "Допустима загрузка только файлов изображений";
+                $error = 'Допустима загрузка только файлов изображений';
                 return $error;
             } else {
-                $input_file_tmp = empty($input_file['tmp_name']) ? null : $input_file['tmp_name'];
-                $input_file_ext = strtolower(pathinfo($input_file['name'], PATHINFO_EXTENSION));
+                $input_file_tmp   = empty($input_file['tmp_name']) ? null : $input_file['tmp_name'];
+                $input_file_ext   = strtolower(pathinfo($input_file['name'], PATHINFO_EXTENSION));
                 $output_file_name = $id . '-' . uniqid() . '-' . time() . '.' . $input_file_ext;
-                $output_file = UPLOAD_DIR . $output_file_name;
+                $output_file      = UPLOAD_DIR . $output_file_name;
+
                 move_uploaded_file($input_file_tmp, $output_file);
                 $userModel->addPicture($id, $output_file_name);
             }
