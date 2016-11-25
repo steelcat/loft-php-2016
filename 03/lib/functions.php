@@ -35,13 +35,16 @@ function get_file_ext($file_name_with_ext)
  */
 function login()
 {
-    $error = false;
-    $login = isset($_POST['login']) ? $_POST['login'] : false;
+    $error    = false;
+    $login    = isset($_POST['login'])    ? $_POST['login'] : false;
     $password = isset($_POST['password']) ? $_POST['password'] : false;
+
     if ($login && $password) {
-        $input_login = $_POST['login'];
+        $input_login    = $_POST['login'];
         $input_password = $_POST['password'];
-        $db = db_connect('localhost', 'loft-php-03');
+        $db             = db_connect('localhost', 'loft-php-03');
+        //ну это не лучший вариант
+        //лучше создать отдельный конфигурационный файл и менять настройки
         $query = $db->prepare("SELECT * FROM users WHERE login = '$input_login'");
         $query->execute();
         $user = $query->fetch();
@@ -61,22 +64,25 @@ function login()
  */
 function register()
 {
-    $error = false;
-    $reglogin = isset($_POST['reglogin']) ? $_POST['reglogin'] : false;
+    $error       = false;
+    $reglogin    = isset($_POST['reglogin'])    ? $_POST['reglogin'] : false;
     $regpassword = isset($_POST['regpassword']) ? $_POST['regpassword'] : false;
+
     if ($reglogin && $regpassword) {
-        $input_reglogin = $_POST['reglogin'];
+        $input_reglogin    = $_POST['reglogin'];
+
         $input_regpassword = $_POST['regpassword'];
-        $db = db_connect('localhost', 'loft-php-03');
-        $query = $db->prepare("SELECT * FROM users WHERE login='$input_reglogin'");
+        $db                = db_connect('localhost', 'loft-php-03');
+        $query             = $db->prepare("SELECT * FROM users WHERE login='$input_reglogin'");
         $query->execute();
         $user = $query->fetch();
+
         if ($user['login'] != $input_reglogin) {
             $query = $db->prepare("INSERT INTO users(login, password) VALUES('$input_reglogin', '$input_regpassword')");
             $query->execute();
             header('Location: /');
         } else {
-            $error = "Такой логин уже есть в базе";
+            $error = 'Такой логин уже есть в базе';
         }
     }
     return $error;
@@ -98,14 +104,16 @@ function logout()
  */
 function update()
 {
-    $img_ext = ['jpg', 'jpeg', 'png', 'gif'];
+    $img_ext  = ['jpg', 'jpeg', 'png', 'gif'];
     $img_mime = ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
-    $id = $_SESSION['id'];
-    $input_name = $_POST['name'] ? htmlentities(strip_tags(trim($_POST['name']))) : null;
-    $input_age = $_POST['age'] ? htmlentities(strip_tags(trim($_POST['age']))) : null;
+    $id       = $_SESSION['id'];
+
+    $input_name  = $_POST['name'] ? htmlentities(strip_tags(trim($_POST['name']))) : null;
+    $input_age   = $_POST['age'] ? htmlentities(strip_tags(trim($_POST['age']))) : null;
     $input_about = $_POST['about'] ? htmlentities(strip_tags(trim($_POST['about']))) : null;
-    $input_file = $_FILES['picture']['size'] ? $_FILES['picture'] : null;
-    $db = db_connect('localhost', 'loft-php-03');
+    $input_file  = $_FILES['picture']['size'] ? $_FILES['picture'] : null;
+    $db          = db_connect('localhost', 'loft-php-03');
+
     if ($input_file) {
         $ext = get_file_ext($input_file['name']);
         $filename = $input_file['name'];
