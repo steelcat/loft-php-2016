@@ -62,7 +62,4 @@ class App
         return self::$instance;
     }
 
-    private function __clone()
-    {
-    }
 }

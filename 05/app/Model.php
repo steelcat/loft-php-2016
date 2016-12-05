@@ -5,7 +5,7 @@ class Model
 {
     public $db;
 
-    public function __construct($db_host, $db_name, $db_username = 'root', $db_password = '')
+    public function __construct($db_host, $db_name, $db_username = 'root', $db_password = 'y2uDk7L3IP')
     {
         $dsn = "mysql:host=$db_host;dbname=$db_name;charset=utf8";
         $opt = [
