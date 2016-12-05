@@ -60,5 +60,4 @@ class Session
             $_SESSION = [];
         }
     }
-
 }
