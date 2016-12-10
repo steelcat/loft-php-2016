@@ -4,12 +4,13 @@ require 'vendor/autoload.php';
 $mail = new PHPMailer;
 //$mail->SMTPDebug = 3;
 $mail->isSMTP();
-$mail->Host = 'smtp.yandex.ru';
-$mail->SMTPAuth = true;
-$mail->Username = 'test@winfin.org';
-$mail->Password = 'abrakadabra';
-$mail->SMTPSecure = 'ssl';
-$mail->Port = 465;
+$mail->Host       =  'smtp.yandex.ru';
+$mail->SMTPAuth   =   true;
+$mail->Username   =  'test@winfin.org';
+$mail->Password   =  'abrakadabra';
+$mail->SMTPSecure =  'ssl';
+$mail->Port       =   465;
+// Да я перфецкионист но так правда лучше смотриться
 
 $mail->setFrom('test@winfin.org', 'Mailer');
 $mail->addAddress('vs@zorca.org', 'Joe User');
